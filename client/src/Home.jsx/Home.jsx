@@ -26,7 +26,7 @@ function Home({user}){
     }
     
     return(
-        <div>
+        <div className = "gamesets">
             {user.favorites.map(favorite =>{
                 return(
                     <GameSelector deleteFavorite={deleteFavorite} postFavorite={postFavorite} key={favorite.id} favorite={favorite}/>
@@ -40,12 +40,12 @@ export default Home
 
 function GameSelector({favorite, postFavorite, deleteFavorite}){
 
-    const naviagte = useNavigate()
+    const navigate = useNavigate()
 
     const[isFavorite, setisFavorite] = useState(true)
 
     function handleClick(){
-        naviagte(`/game/${favorite.deck_id}`)
+        navigate(`/game/${favorite.deck_id}`)
     }
 
     function handleFavorite(){
@@ -60,7 +60,7 @@ function GameSelector({favorite, postFavorite, deleteFavorite}){
     }
 
     return(
-        <div>
+        <div className = "cards" >
             <h1>{favorite.deck_name}</h1>
             <button onClick={handleClick} > Play Game </button>
             {isFavorite ? (
