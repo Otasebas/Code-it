@@ -7,6 +7,7 @@ import CreateDeck from './Decks.jsx/CreateDecks';
 import Game from './Game/Game';
 import Cards from './Decks.jsx/Cards';
 import Score from './Game/Score';
+import PublicDecks from './Search/PublicDecks';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -23,7 +24,7 @@ function App() {
           res.json().then((session) => setUser(session))
         } 
         else {
-          console.log(null);
+          setUser(null);
         }
       });
   }, []);
@@ -72,9 +73,9 @@ function App() {
         path: "/public",
         element: <div>
                   <Header setUser={setUser} user={user}/>
-                  <Score user={user} />
+                  <PublicDecks user={user} />
                 </div>
-      }
+      },
     ]);
   
   return (

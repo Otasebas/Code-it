@@ -23,11 +23,19 @@ function Header({user, setUser}){
     function handleScores(){
         navigate("/score")
     }
+
+    function handlePublic(){
+        navigate("/public")
+    }
     
     return(
+
         <div className = "navbar">
             <img className = "nav-logo" alt = "empty array" src="https://blog.soliditylang.org/img/avatar-icon.png" onClick={(navigate("/"))}/>
             <button  > Public </button>
+
+            <button  onClick={handlePublic}> Public Decks </button>
+
             <button  > Following </button>
             <button onClick={handleFavorites} > Favorites </button>
             <button onClick={handleDecks} > Create Decks </button>

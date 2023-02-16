@@ -15,7 +15,13 @@ class FavoritesController < ApplicationController
 
     def show
         all_favorite = Favorite.all
-        favorite = all_favorite.where(user_id: params[:id])
+        favorite = all_favorite.where(user_id: params[:user_id])
+
+        render json: favorite
+    end
+
+    def index
+        favorite = Favorite.all
         render json: favorite
     end
     
