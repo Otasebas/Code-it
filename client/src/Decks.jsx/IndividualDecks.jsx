@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 function IndividualDecks({deck, setDecks, decks}){
 
     const navigate = useNavigate()
+
+    const[isPrivate, setIsPrivate] = useState(deck.private)
 
     function handleClick(){
         navigate(`/cards/${deck.id}`)
@@ -27,11 +30,29 @@ function IndividualDecks({deck, setDecks, decks}){
         }
     }
 
+    function handlePrivate(){
+
+        fetch(`/decks/${deck.id}`,{
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "private": !isPrivate
+            })
+        })
+        .then(req => req.json())
+        .then(()=>{
+            setIsPrivate(!isPrivate)
+        })
+    }
+
     return(
         <div id="eachSet">
         <h1>{deck.name}</h1>
         <button onClick={handleClick} > Add Cards </button>
         <button onClick={handleDelete}> Delete Set </button>
+        <button onClick={handlePrivate}> {isPrivate ?("Set is Private"):("Set is Public")} </button>
     </div>
     )
 }

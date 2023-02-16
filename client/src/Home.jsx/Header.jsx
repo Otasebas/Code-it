@@ -23,10 +23,14 @@ function Header({user, setUser}){
     function handleScores(){
         navigate("/score")
     }
+
+    function handlePublic(){
+        navigate("/public")
+    }
     
     return(
         <div>
-            <button  > Public </button>
+            <button  onClick={handlePublic}> Public Decks </button>
             <button  > Following </button>
             <button onClick={handleDecks} > Create Decks </button>
             <button onClick={handleFavorites} > Favorites </button>
