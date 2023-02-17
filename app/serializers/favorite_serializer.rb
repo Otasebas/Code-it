@@ -18,6 +18,4 @@ class FavoriteSerializer < ActiveModel::Serializer
     object.user.username
   end
 
-    has_many :decks, serializer: CustomDeckforFavoriteSerializer
-
 end
