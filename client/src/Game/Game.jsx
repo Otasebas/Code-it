@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-
-
 function Game({ user }) {
     const { id } = useParams();
   
@@ -29,14 +27,20 @@ function Game({ user }) {
       })
         .then((req) => req.json())
         .then();
-        }
+    }
   
     return (
     <TypeParent postScore={postScore} deck={deck} />
     );
   }
-
-
+  function TypeParent({ postScore, deck }) {
+    
+    const [currentWordIndex, setCurrentWordIndex] = useState(0);
+    const [words, setWords] = useState(["seb", "tuck", "alej"]);
+    // const [letterMatched, setLetterMatched] = useState(false);
+    const [inputValue, setInputValue] = useState("");
+    const [errorsCount, setErrorsCount] = useState(0);
+    const [isDone, setIsDone] = useState(false);
     
     function handleChange(e) {
         const input = e.target.value;
@@ -72,62 +76,61 @@ function Game({ user }) {
       }
     }
     
-    // function restart() {
-    //   setCurrentWordIndex(0);
-    //   setWords(deck);
-    // //   setLetterMatched(false);
-    //   setInputValue("");
-    //   setIsDone(false);
-    //   setErrorsCount(0);
-    // }
-  
-    function gameOver() {
-      setIsDone(true);
-      setCurrentWordIndex(0);
-      setWords(["Your done!"])
-      postScore(0);
-    }
-  
-    // const errorBarStyles = { width: `${(errorsCount / 10) * 100}%` };
-    const na = [words[currentWordIndex]];
+        // function restart() {
+        //   setCurrentWordIndex(0);
+        //   setWords(deck);
+        // //   setLetterMatched(false);
+        //   setInputValue("");
+        //   setIsDone(false);
+        //   setErrorsCount(0);
+        // }
     
-    const modifiedValue = na.map((letter, index) => {
-      return letter === inputValue[index] ? (
-        <span className= "highlighted" key={index}>
-          {letter}
-        </span>
-      ) : (
-        <span key={index}>{letter}</span>
-      );
-    });
+        function gameOver() {
+        setIsDone(true);
+        setCurrentWordIndex(0);
+        setWords(["Your done!"])
+        postScore(0);
+        }
   
-    return (
-        <div className="wrapper">
-            <div className="wrapper-input">
-                {isDone ? (
-                    null
-                ) : (
+        // const errorBarStyles = { width: `${(errorsCount / 10) * 100}%` };
+        const na = [words[currentWordIndex]];
+        
+        const modifiedValue = na.map((letter, index) => {
+        return letter === inputValue[index] ? (
+            <span className= "highlighted" key={index}>
+            {letter}
+            </span>
+        ) : (
+            <span key={index}>{letter}</span>
+        );
+        });
+    
+        return (
+            <div className="wrapper">
+                <div className="wrapper-input">
+                    {isDone ? (
+                        null
+                    ) : (
+                        <div>
+                            <h2 className="current-word">{modifiedValue}</h2>
+                            <input
+                                type="text"
+                                placeholder="type here"
+                                onChange={handleChange}
+                                value={inputValue}
+                            />
+                        </div>
+                    )}
                     <div>
-                        <h2 className="current-word">{modifiedValue}</h2>
-                        <input
-                            type="text"
-                            placeholder="type here"
-                            onChange={handleChange}
-                            value={inputValue}
-                        />
+                        {isDone || errorsCount >= 10 ? (
+                                <h1> {errorsCount} </h1>
+                            ) : (
+                                null
+                            )}
                     </div>
-                )}
-                <div>
-                    {isDone || errorsCount >= 10 ? (
-                            <h1> {errorsCount} </h1>
-                        ) : (
-                            null
-                        )}
                 </div>
-            </div>
-      </div>
-    );
+        </div>
+        );
   }
   
-
 export default Game
