@@ -10,6 +10,7 @@ function Header({user, setUser}){
           .then(req => req.json())
           .then(res => console.log(res))
           .catch(error => console.error("Error:", error));
+        navigate("/")
     }
 
     function handleDecks(){

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   resources :favorites, only: [:index, :show, :create, :destroy]
   resources :follows, only: [:create, :destroy]
-  resources :scores, only: [:create]
+  resources :scores, only: [:create, :index]
   resources :cards, only: [:create, :destroy, :update]
   resources :decks
   resources :users
