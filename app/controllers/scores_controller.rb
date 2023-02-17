@@ -8,7 +8,7 @@ class ScoresController < ApplicationController
 
     def index
         all_scores = Score.all
-        scores = all_scores.where(user_id: params[:session_id])
+        scores = all_scores.where(id: session[:user_id])
 
         render json: all_scores
     end
