@@ -13,7 +13,7 @@ function IndividualDecks({deck, setDecks, decks}){
 
     function handleDelete(){
         if(window.confirm("Are you sure you want to delete")){
-            fetch(`http://localhost:3000/decks/${deck.id}`, {
+            fetch(`/decks/${deck.id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
