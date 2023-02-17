@@ -4,16 +4,20 @@ import { useState } from "react"
 
 function Game({user}){
 
+    //id of the webpage
     const {id} = useParams()
     
+    //useState for deck
     const[deck, setDeck] = useState({})
 
+    //fetch for the deck based on id
     useEffect(()=>{
         fetch(`/decks/${id}`)
         .then(req => req.json())
         .then(res => setDeck(res))
     },[id])
 
+    //function to post score to score table with id, score and user.id
     function postScore(score){
         fetch("/scores",{
             method: 'POST',
@@ -22,7 +26,7 @@ function Game({user}){
             },
             body: JSON.stringify({
                 "user_id": user.id,
-                "deck_id": deck.id,
+                "deck_id": id,
                 "score": score
             })
         })
@@ -34,8 +38,6 @@ function Game({user}){
         <TypeParent postScore={postScore} cards={deck.cards}/>
     )
 }
-
-
 
 function TypeParent({cards, postScore}){
 
@@ -52,13 +54,12 @@ function TypeParent({cards, postScore}){
         <TypeIt 
             postScore={postScore} 
             score={score} 
-            setScore={setScore} 
-            key="1" 
+            setScore={setScore}  
             setQuestionArray={setQuestionArray} 
             setQuestionCount={setQuestionCount} 
-            questionCount={questionCount} 
-            question={questionArray[questionCount]} 
+            questionCount={questionCount}  
             questionArray={questionArray}
+            question={questionArray[questionCount]}
         />
     )
 }

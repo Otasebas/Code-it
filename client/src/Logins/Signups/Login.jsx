@@ -43,6 +43,17 @@ function Login({setUser}){
                 })
             })
             setUser(res)
+            fetch("/favorites",{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "user_id": res.id,
+                    "deck_id": 2
+                })
+            })
+            setUser(res)
 
         })
 
