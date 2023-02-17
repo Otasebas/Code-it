@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authorize, except: :me
+    # skip_before_action :authorize, except: :me
 
     def index
         user = User.all
@@ -7,10 +7,20 @@ class UsersController < ApplicationController
     end
     
     def show
-        #less personal show will be shown to all users
-        user = User.find_by(id: params[:id])
-        render json: user
-    end
+        favorites = Favorite.where(user_id: params[:id])
+        fav_hash = {
+          user_id: params[:id],
+          favorites: favorites.map do |favorite|
+            {
+              author: favorite.deck.user.username,
+              deck_name: favorite.deck.name,
+              deck: favorite.deck,
+              cards: favorite.deck.cards
+            }
+          end
+        }
+        render json: fav_hash
+      end
 
     def create
         user = User.create(user_params)
@@ -27,8 +37,7 @@ class UsersController < ApplicationController
         # user = User.find(session[:user_id])
        #comment out below for real shit 
         # user = User.find(session[:user_id])
-        render json: current_user, status: :ok
-        
+        render json: @current_user, status: :ok
       end
 
     private

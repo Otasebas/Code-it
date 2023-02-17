@@ -31,8 +31,7 @@ function Header({user, setUser}){
     
     return(
         <div>
-            <button  onClick={handlePublic}> Public Decks </button>
-            <button  > Following </button>
+            <button onClick={handlePublic}> Public Decks </button>
             <button onClick={handleDecks} > Create Decks </button>
             <button onClick={handleFavorites} > Favorites </button>
             <button onClick={handleScores} > Personal Scores </button>
