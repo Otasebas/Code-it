@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
+
 function Game({ user }) {
     const { id } = useParams();
   
@@ -28,21 +29,13 @@ function Game({ user }) {
       })
         .then((req) => req.json())
         .then();
-    }
+        }
   
     return (
     <TypeParent postScore={postScore} deck={deck} />
     );
   }
 
-  function TypeParent({ postScore, deck }) {
-    
-    const [currentWordIndex, setCurrentWordIndex] = useState(0);
-    const [words, setWords] = useState(["seb", "tuck", "alej"]);
-    // const [letterMatched, setLetterMatched] = useState(false);
-    const [inputValue, setInputValue] = useState("");
-    const [errorsCount, setErrorsCount] = useState(0);
-    const [isDone, setIsDone] = useState(false);
 
     
     function handleChange(e) {
